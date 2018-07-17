@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	<meta charset="utf-8">
+	<title>PayPal REST Refund Tool</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="app.js"></script>
+    </head>
+    <body>
+	<h1>PayPal REST Refund Tool</h1>
+	<table>
+	    <tr>
+		<td style="text-align: right;"><label for="client_id"><strong>Client ID:</strong></label></td>
+		<td><input type="text" id="client_id" size="80" placeholder="Client ID from YOUR REST API app"></td>
+	    </tr>
+	    <tr>
+		<td style="text-align: right;"><label for="secret"><strong>Secret:</strong></secret></td>
+		<td><input type="text" id="secret" size="80" placeholder="Secret from YOUR REST API app"></td>
+	    </tr>
+	    <tr>
+		<td style="text-align: right;"><label for="merchant_id"><strong>Merchant ID:</strong></label></td>
+		<td><input type="text" id="merchant_id" size="40" placeholder="Merchant account ID or email address"></td>
+	    </tr>
+	    <tr>
+		<td style="text-align: right;"><label for="transaction_id"><strong>Transaction ID:</strong></label></td>
+		<td><input type="text" id="transaction_id" size="40" placeholder="PayPal transaction ID from seller's account"></td>
+	    </tr>
+	    <tr>
+		<td style="text-align: right; vertical-align: top;"><strong>Refund type:</strong></td>
+		<td>
+		    <input type="radio" name="full_refund" value="Yes" id="full_refund_yes" checked="checked"><label for="full_refund_yes">Full</label><br>
+		    <input type="radio" name="full_refund" value="No" id="full_refund_no"><label for="full_refund_no">Partial</label>
+		</td>
+	    </tr>
+	    <tr>
+		<td style="text-align: right;"><label for="amount"><strong>Refund amount:</strong></label></td>
+		<td>
+		    <input type="text" id="amount" disabled="disabled" size="10" placeholder="Amount">
+		    <input type="text" id="currency" disabled="disabled" size="3" value="USD"
+		</td>
+	    </tr>
+	    <tr>
+		<td style="text-align: right; vertical-align: top;"><strong>PayPal environment:</strong></td>
+		<td>
+		    <input type="radio" name="environment" id="environment_live" checked="checked"><label for="environment_live">Live</label><br>
+		    <input type="radio" name="environment" id="environment_sandbox"><label for="environment_sandbox">Sandbox</label><br>
+		</td>
+	    </tr>
+	</table>
+	<button id="process" style="margin: 20px;" disabled="disabled">Process Refund</button>
+	<fieldset>
+	    <legend>Result of Last Refund Attempt</legend>
+	    <table>
+		<tr>
+		    <td style="text-align: right;"><strong>Result:</strong></td>
+		    <td id="result" style="min-width: 600px;"></td>
+		</tr>
+		<tr>
+		    <td style="text-align: right;"><strong>Refund transaction ID:</strong></td>
+		    <td id="refund_txn_id"></td>
+		</tr>
+		<tr>
+		    <td style="text-align: right;"><strong>Error message:</strong></td>
+		    <td id="errmsg"></td>
+		</tr>
+	    </table>
+	</fieldset>
+	<div>
+	    <p style="font-style: italic">Privacy/security statement:</p>
+	    <p style="font-style: italic">The information you enter here is transmitted to this website's web server in order to fulfill your request, and is not used for any other purpose.  The website does not store any of the provided information longer than is needed to process the requested refund.  The website uses secure channels (TLSv1.2) to communicate with your browser.  The author has made reasonable attempts to make sure that your information is secure; however, the author cannot guarantee that this site is completely secure.  Use at your own risk.</p>
+	</div>
+    </body>
+</html>
