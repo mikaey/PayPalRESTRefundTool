@@ -16,6 +16,7 @@ $(document).ready(function() {
 	var currency = $("#currency").val().trim();
 	var fullRefund = $("#full_refund_yes").filter(":checked").length;
 	var environment = $("#environment_live").filter(":checked").length ? "live" : "sandbox";
+	var orderId = $("#order_id").val().trim();
 
 	var errors = [];
 	if(!clientId.length) {
@@ -26,8 +27,10 @@ $(document).ready(function() {
 	    errors.push("Secret is required.");
 	}
 
-	if(!transactionId.length) {
-	    errors.push("Transaction ID is required.");
+	if(transactionId.length && orderId.length) {
+	    errors.push("Please only enter a transaction ID or an order ID -- not both.");
+	} else if(!transactionId.length && !orderId.length) {
+	    errors.push("Please enter either a transaction ID or an order ID.");
 	}
 
 	if(!fullRefund) {
@@ -56,7 +59,6 @@ $(document).ready(function() {
 	var req = {
 	    clientId: clientId,
 	    secret: secret,
-	    transactionId: transactionId,
 	    fullRefund: fullRefund,
 	    environment: environment
 	};
@@ -68,6 +70,12 @@ $(document).ready(function() {
 
 	if(merchantId.length) {
 	    req.merchantId = merchantId;
+	}
+
+	if(transactionId.length) {
+	    req.transactionId = transactionId;
+	} else if(orderId.length) {
+	    req.orderId = orderId;
 	}
 
 	$("#result,#refund_txn_id,#errmsg").text("(pending)");
